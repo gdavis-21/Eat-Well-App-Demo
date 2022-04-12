@@ -23,7 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QsE-7A-VcD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="319" y="641"/>
+            <point key="canvasLocation" x="319" y="1060"/>
         </scene>
         <!--Journal-->
         <scene sceneID="MT9-bn-3fC">
@@ -141,6 +141,11 @@
                                                 <constraint firstItem="lN4-aT-38J" firstAttribute="top" secondItem="Bug-0R-BlP" secondAttribute="bottom" constant="8" symbolic="YES" id="t7S-JN-XJ7"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="datePicker" destination="Bug-0R-BlP" id="crT-ZF-hUx"/>
+                                            <outlet property="textField" destination="4ED-yL-RGY" id="xzk-pf-WSR"/>
+                                            <outlet property="textView" destination="oGh-t2-pEo" id="lgI-K9-fOf"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -185,6 +190,22 @@
             </objects>
             <point key="canvasLocation" x="318.84057971014494" y="-20.089285714285712"/>
         </scene>
+        <!--Snapshot-->
+        <scene sceneID="euf-40-Cac">
+            <objects>
+                <viewController id="LB3-di-jnK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="57B-13-Ad7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7oE-Z4-Cjn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Snapshot" id="Ks5-gJ-7kU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="glT-V5-wSO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1102" y="471"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="U19-f5-WMc">
             <objects>
@@ -196,7 +217,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="yaH-qb-Nax" kind="relationship" relationship="viewControllers" id="BUJ-5i-cqn"/>
-                        <segue destination="tlH-ZH-2Wz" kind="relationship" relationship="viewControllers" id="DnF-5a-M0L"/>
+                        <segue destination="LB3-di-jnK" kind="relationship" relationship="viewControllers" id="7N1-nh-NHf"/>
+                        <segue destination="tlH-ZH-2Wz" kind="relationship" relationship="viewControllers" id="Drw-JJ-YgE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4c-V6-ZLa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -9,6 +9,12 @@ import UIKit
 
 class JournalTableViewCell: UITableViewCell {
 
+    @IBOutlet var datePicker: UIDatePicker!
+    
+    @IBOutlet var textView: UITextView!
+    
+    @IBOutlet var textField: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
