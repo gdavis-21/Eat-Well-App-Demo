@@ -10,12 +10,16 @@ import CoreData
 
 class JournalViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var dayOfDate: Int? = nil
-    var days: [Day]? = nil
-    var selectedDay: Day? = nil
-    var entries: [Entry]? = nil
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    // days is the array of Strings used to populate the collectionView.
+    var days: [String]? = nil
+    // entries is the array of Entry objects used to populate the tableView.
+    var entries: [Entry]? = nil
+    
+    // selectedDateNumeric holds the date the user selects (i.e. 14).
+    var selectedDate: String? = nil
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -27,17 +31,6 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        // Create day objects in PersistentStore
-        days = createDays()
-        
-        // Get today's date (i.e. April 12, 2022)
-        let date = Date.now.formatted(date: .abbreviated, time: .omitted)
-        
-        label.text = date
-        
-        // Split the string to get the numerical date (i.e. 14).
-        dayOfDate = Int(date.components(separatedBy: ",")[0].components(separatedBy: " ")[1])
-        
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.tableView.dataSource = self
@@ -45,16 +38,20 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         
         tableView.rowHeight = 200
         
-        selectedDay = fetchDay(selectedDate: dayOfDate!)
+        // Get today's date (i.e. April 12, 2022)
+        selectedDate = Date.now.formatted(date: .numeric, time: .omitted).components(separatedBy: "/")[1]
         
-        entries = fetchEntries(selectedDate: dayOfDate!)
+        // Set the main label to display the current date.
+        label.text = Date.now.formatted(date: .abbreviated, time: .omitted)
+        
+        days = createDays()
+        entries = fetchEntries(selectedDate: selectedDate)
     }
     
     // MARK: - Table View
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        entries?.count ?? 0
-
+        entries!.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,84 +68,105 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JournalCollectionViewCell", for: indexPath) as! JournalCollectionViewCell
-        cell.button.setTitle(String(days![indexPath.row].day), for: .normal)
+        // Set the title of the button to day (i.e. 5).
+        cell.button.setTitle(String(days![indexPath.row]), for: .normal)
         
-        cell.button.index = indexPath.row
-        print(cell.button.index!)
+        // Set the button's stringDate to indexPath.row (i.e. 5).
+        cell.button.stringDate = String(indexPath.row)
+        
         return cell
+    }
+    
+    // MARK: - Core Data Functions
+    
+    func fetchEntries(selectedDate: String?) -> [Entry] {
+        var entries = [Entry]()
+        
+        do {
+            let request = Entry.fetchRequest() as NSFetchRequest<Entry>
+            // Select only the entries whose 'stringDate' attribute match the selectedDate.
+            let predicate = NSPredicate(format: "stringDate == %@", selectedDate!)
+            request.predicate = predicate
+            // Execute the query with the given predicate.
+            entries = try context.fetch(request)
+        }
+        catch {
+            print("Error: Unable to fetchRequest.")
+        }
+        return entries
     }
     
     
     // MARK: - Extra Functions
     
-    func fetchDay(selectedDate: Int) -> Day {
-        var day = [Day]()
-        do {
-            let request = Day.fetchRequest() as NSFetchRequest<Day>
-            let predicate = NSPredicate(format: "day == %d", selectedDate)
-            request.predicate = predicate
-            day = try context.fetch(request)
-        }
-        catch {
-            
-        }
-        return day[0]
-    }
-    
-    func fetchEntries(selectedDate: Int) -> [Entry] {
-        var entries = [Entry]()
-        do {
-            let request = Entry.fetchRequest() as NSFetchRequest<Entry>
-            let predicate = NSPredicate(format: "day == %d", selectedDate)
-            request.predicate = predicate
-            entries = try context.fetch(request)
-        }
-        catch {
-            
-        }
-        return entries
-    }
-    
-    // Creates an array of Days from 1 to 30.
-    func createDays() -> [Day] {
-        var dates = [Day]()
-        
+    // Creates an array of Strings from 1 to 30.
+    func createDays() -> [String] {
+        var days = [String]()
         for i in 1 ... 30 {
-            let day = Day(context: context)
-            day.day = Int64(i)
-            dates.append(day)
+            days.append(String(i))
         }
-        return dates
+        return days
     }
 
     @IBAction func tableButtonPlus(_ sender: Any) {
-        let entry = Entry(context: context)
-        entry.day = selectedDay!.day
-        entries?.append(entry)
+        // Create a new entry object to add to tableView.
+        var entry = Entry(context: context)
+        // Initialize its stringDate to selectedDate
+        entry.stringDate = selectedDate!
         // Update the display to include the entry.
-        try! self.context.save()
+        do {
+            try self.context.save()
+        }
+        catch {
+            
+        }
+        entries = fetchEntries(selectedDate: selectedDate)
+        // Update the tableView.
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
 
     @IBAction func collectionButtonDate(_ sender: Any) {
-        dayOfDate = Int(days![(sender as! JournalButton).index!].day)
-        selectedDay = fetchDay(selectedDate: dayOfDate!)
-        
-        entries = fetchEntries(selectedDate: Int(days![(sender as! JournalButton).index!].day))
-        
-        for row in 0..<entries!.count {
-            let indexPath = NSIndexPath(row: row, section: 0)
-            let cell: JournalTableViewCell = tableView.cellForRow(at: indexPath as IndexPath) as! JournalTableViewCell
-            cell.modifyValues(calories: String(entries![row].calories), notes: entries![row].notes ?? "")
-            
+        entries = fetchEntries(selectedDate: selectedDate)
+        var counter1 = 0
+        if entries!.count > 0 && tableView.visibleCells.count > 0{
+            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
+                entries![counter1].notes = cell.textView.text
+                entries![counter1].calories = cell.textField.text
+                entries![counter1].date = cell.datePicker.date
+                 counter1 += 1
+            }
+            do {
+                try self.context.save()
+            }
+            catch {
+                
+            }
         }
         
+        // Modify selectedDate to the date the user selected.
+        selectedDate = days![Int((sender as! JournalButton).stringDate!)!]
+        
+        entries = fetchEntries(selectedDate: selectedDate)
+        
+        tableView.reloadData()
+        
+        print("Selected Date: \(selectedDate!)")
+        print("Number of Entries: \(entries!.count)")
+        print("Number of Visible Cells: \(tableView.visibleCells.count)")
+        
+        var counter = 0
+        if entries!.count > 0 && tableView.visibleCells.count > 0{
+            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
+                cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date!)
+                //cell.awakeFromNib()
+                counter += 1
+            }
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
-    
+}
 }
 

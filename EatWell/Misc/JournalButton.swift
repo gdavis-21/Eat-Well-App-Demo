@@ -16,7 +16,6 @@ class JournalButton: UIButton {
         // Drawing code
     }
     */
-    
-    var index: Int?
+    var stringDate: String?
 
 }

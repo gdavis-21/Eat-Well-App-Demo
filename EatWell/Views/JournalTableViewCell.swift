@@ -15,23 +15,23 @@ class JournalTableViewCell: UITableViewCell {
     
     @IBOutlet var textField: UITextField!
     
-    var date: Date? = nil
-    var calories: String? = nil
-    var notes: String? = nil
+    var date: Date?
+    var calories: String?
+    var notes: String?
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        datePicker.date = date ?? Date.now
-        textField.text = calories ?? "0"
-        textView.text = notes ?? ""
 
     }
     
-    func modifyValues(calories: String, notes: String) {
+    func updateValues(calories: String, notes: String, date: Date) {
+        // Update calories variable to reflect user input.
         textField.text = calories
+        // Update notes variable to reflect user input.
         textView.text = notes
+        // Update date variable to reflect user input.
+        datePicker.date = date
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
