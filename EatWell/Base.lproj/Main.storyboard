@@ -56,10 +56,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="40"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9n-b6-nVU">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9n-b6-nVU" customClass="JournalButton" customModule="EatWell" customModuleProvider="target">
                                                             <rect key="frame" x="12.5" y="4.5" width="30.5" height="31"/>
                                                             <state key="normal" title="Button" backgroundImage="circlebadge.fill" catalog="system"/>
                                                             <buttonConfiguration key="configuration" style="plain" title="1"/>
+                                                            <connections>
+                                                                <action selector="collectionButtonDate:" destination="yaH-qb-Nax" eventType="touchUpInside" id="fiw-9G-I6d"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -183,6 +186,7 @@
                     <tabBarItem key="tabBarItem" title="Journal" id="bvl-0g-NBd"/>
                     <connections>
                         <outlet property="collectionView" destination="RA0-bd-AnD" id="uga-AL-0IQ"/>
+                        <outlet property="label" destination="Y0x-Wv-Ieh" id="gZp-Ew-iYL"/>
                         <outlet property="tableView" destination="W3V-Ge-VDO" id="PAR-cq-nXX"/>
                     </connections>
                 </viewController>

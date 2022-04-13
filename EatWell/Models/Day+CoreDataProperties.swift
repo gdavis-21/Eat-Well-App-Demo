@@ -17,24 +17,6 @@ extension Day {
     }
 
     @NSManaged public var day: Int64
-    @NSManaged public var hasA: NSSet?
-
-}
-
-// MARK: Generated accessors for hasA
-extension Day {
-
-    @objc(addHasAObject:)
-    @NSManaged public func addToHasA(_ value: Entry)
-
-    @objc(removeHasAObject:)
-    @NSManaged public func removeFromHasA(_ value: Entry)
-
-    @objc(addHasA:)
-    @NSManaged public func addToHasA(_ values: NSSet)
-
-    @objc(removeHasA:)
-    @NSManaged public func removeFromHasA(_ values: NSSet)
 
 }
 

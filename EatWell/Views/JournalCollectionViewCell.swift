@@ -9,5 +9,7 @@ import UIKit
 
 class JournalCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var button: UIButton!
+    @IBOutlet var button: JournalButton!
+    
+    
 }

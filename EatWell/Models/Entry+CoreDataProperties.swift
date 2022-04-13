@@ -16,10 +16,10 @@ extension Entry {
         return NSFetchRequest<Entry>(entityName: "Entry")
     }
 
-    @NSManaged public var time: String?
     @NSManaged public var calories: Int64
     @NSManaged public var notes: String?
-    @NSManaged public var hasA: Day?
+    @NSManaged public var time: String?
+    @NSManaged public var day: Int64
 
 }
 
