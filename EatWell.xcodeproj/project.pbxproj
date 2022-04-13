@@ -17,6 +17,7 @@
 		7782B9402805E51400493C7E /* JournalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B93F2805E51400493C7E /* JournalButton.swift */; };
 		7782B95728066E7000493C7E /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B95528066E7000493C7E /* Entry+CoreDataClass.swift */; };
 		7782B95828066E7000493C7E /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B95628066E7000493C7E /* Entry+CoreDataProperties.swift */; };
+		7782B95A280697D200493C7E /* SnapshotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B959280697D200493C7E /* SnapshotViewController.swift */; };
 		778F3AF82804F72F000B4264 /* JournalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F3AF72804F72F000B4264 /* JournalCollectionViewCell.swift */; };
 		778F3AFA28050463000B4264 /* JournalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F3AF928050463000B4264 /* JournalTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		7782B93F2805E51400493C7E /* JournalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalButton.swift; sourceTree = "<group>"; };
 		7782B95528066E7000493C7E /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7782B95628066E7000493C7E /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7782B959280697D200493C7E /* SnapshotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotViewController.swift; sourceTree = "<group>"; };
 		778F3AF72804F72F000B4264 /* JournalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCollectionViewCell.swift; sourceTree = "<group>"; };
 		778F3AF928050463000B4264 /* JournalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				776856B72804C16A00363385 /* JournalViewController.swift */,
+				7782B959280697D200493C7E /* SnapshotViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7782B95A280697D200493C7E /* SnapshotViewController.swift in Sources */,
 				778F3AF82804F72F000B4264 /* JournalCollectionViewCell.swift in Sources */,
 				778F3AFA28050463000B4264 /* JournalTableViewCell.swift in Sources */,
 				7782B95728066E7000493C7E /* Entry+CoreDataClass.swift in Sources */,

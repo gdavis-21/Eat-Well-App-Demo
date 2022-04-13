@@ -107,6 +107,15 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         return days
     }
+    
+    func saveCoreData() {
+        do {
+            try self.context.save()
+        }
+        catch {
+            
+        }
+    }
 
     @IBAction func tableButtonPlus(_ sender: Any) {
         // Create a new entry object to add to tableView.
@@ -129,20 +138,20 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @IBAction func collectionButtonDate(_ sender: Any) {
         entries = fetchEntries(selectedDate: selectedDate)
-        var counter1 = 0
+        
+        var counter = 0
+        // Loop over each entry in the selectedDate.
         if entries!.count > 0 && tableView.visibleCells.count > 0{
             for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
-                entries![counter1].notes = cell.textView.text
-                entries![counter1].calories = cell.textField.text
-                entries![counter1].date = cell.datePicker.date
-                 counter1 += 1
+                // Save the text stored in 'notes' textView.
+                entries![counter].notes = cell.textView.text
+                // Save the text stored in 'calories' textField.
+                entries![counter].calories = cell.textField.text
+                // Save the date stored in 'date' datePicker.
+                entries![counter].date = cell.datePicker.date
+                 counter += 1
             }
-            do {
-                try self.context.save()
-            }
-            catch {
-                
-            }
+            saveCoreData()
         }
         
         // Modify selectedDate to the date the user selected.
@@ -156,13 +165,15 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         print("Number of Entries: \(entries!.count)")
         print("Number of Visible Cells: \(tableView.visibleCells.count)")
         
-        var counter = 0
-        if entries!.count > 0 && tableView.visibleCells.count > 0{
+        counter = 0
+        // Loop over each entry in the selectedDate.
+        if entries!.count > 0 && tableView.visibleCells.count > 0 {
             for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
+                // Update cell to reflect new calories, notes, and date.
                 cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date!)
-                //cell.awakeFromNib()
                 counter += 1
             }
+            
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
