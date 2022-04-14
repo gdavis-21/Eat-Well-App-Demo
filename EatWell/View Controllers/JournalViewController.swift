@@ -46,6 +46,38 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         days = createDays()
         
         entries = fetchEntries(selectedDate: selectedDate)
+        
+        tableView.reloadData()
+    
+        var counter = 0
+        if entries!.count > 0 && tableView.visibleCells.count > 0 {
+            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
+                // Update cell to reflect new calories, notes, and date.
+                cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date ?? Date.now)
+                    counter += 1
+            }
+            tableView.reloadData()
+        }
+    }
+        
+
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if selectedDate == Date.now.formatted(date: .numeric, time: .omitted).components(separatedBy: "/")[1] {
+            var counter = 0
+            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
+                // Save the text stored in 'notes' textView.
+                entries![counter].notes = cell.textView.text
+                // Save the text stored in 'calories' textField.
+                entries![counter].calories = cell.textField.text
+                // Save the date stored in 'date' datePicker.
+                entries![counter].date = cell.datePicker.date
+                 counter += 1
+            }
+            try! context.save()
+        }
     }
     
     // MARK: - Table View
@@ -107,7 +139,7 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         return days
     }
-
+        
     @IBAction func tableButtonPlus(_ sender: Any) {
         
         if entries!.count < 3 {
