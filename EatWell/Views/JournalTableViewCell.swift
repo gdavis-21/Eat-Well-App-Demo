@@ -22,6 +22,10 @@ class JournalTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        textField.text = calories ?? "0"
+        textView.text = notes ?? ""
+        datePicker.date = date ?? Date.now
 
     }
     

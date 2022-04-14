@@ -244,7 +244,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5e3-sz-iaP">
-                                                <rect key="frame" x="191" y="54" width="120" height="21"/>
+                                                <rect key="frame" x="191" y="54" width="95" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -263,7 +263,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAv-DD-wYp">
-                                                <rect key="frame" x="162" y="54" width="149" height="21"/>
+                                                <rect key="frame" x="162" y="54" width="91" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -288,7 +288,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTA-Xh-zzs">
-                                                <rect key="frame" x="146" y="54" width="165" height="21"/>
+                                                <rect key="frame" x="146" y="54" width="92" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -300,20 +300,22 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r06-ll-dMn">
                                         <rect key="frame" x="0.0" y="446" width="319" height="126"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Average Heart Rate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0E-ZU-W02">
-                                                <rect key="frame" x="20" y="54" width="170" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Heart Rate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0E-ZU-W02">
+                                                <rect key="frame" x="20" y="54" width="98" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNB-aS-LF7">
+                                                <rect key="frame" x="117" y="51" width="110" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <constraints>
-                                            <constraint firstItem="r0E-ZU-W02" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="r06-ll-dMn" secondAttribute="leading" constant="20" symbolic="YES" id="8Zf-1n-lWf"/>
-                                            <constraint firstItem="r0E-ZU-W02" firstAttribute="top" secondItem="r06-ll-dMn" secondAttribute="top" constant="54" id="E9i-TH-bbW"/>
-                                            <constraint firstAttribute="trailing" secondItem="r0E-ZU-W02" secondAttribute="trailing" constant="129" id="jYh-1q-iQZ"/>
-                                            <constraint firstItem="r0E-ZU-W02" firstAttribute="centerY" secondItem="r06-ll-dMn" secondAttribute="centerY" id="maP-x7-VpO"/>
-                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -343,10 +345,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Snapshot" id="Ks5-gJ-7kU"/>
                     <connections>
-                        <outlet property="averageHeartRate" destination="r0E-ZU-W02" id="B4E-nN-tIh"/>
-                        <outlet property="caloriesBurned" destination="IMH-xq-dYh" id="6vy-XY-jGV"/>
-                        <outlet property="caloriesConsumed" destination="5e3-sz-iaP" id="rgz-Df-jRs"/>
-                        <outlet property="stepsWalked" destination="TrU-mB-3IA" id="rIt-bO-BQu"/>
+                        <outlet property="caloriesBurnedLabel" destination="NAv-DD-wYp" id="bLi-Xl-EmQ"/>
+                        <outlet property="caloriesConsumedLabel" destination="5e3-sz-iaP" id="DDI-nN-aDg"/>
+                        <outlet property="heartRateLabel" destination="DNB-aS-LF7" id="4LE-fX-6i6"/>
+                        <outlet property="stepsWalkedLabel" destination="BTA-Xh-zzs" id="Rxy-e2-Zeo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glT-V5-wSO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

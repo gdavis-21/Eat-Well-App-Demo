@@ -2,7 +2,7 @@
 //  Entry+CoreDataProperties.swift
 //  EatWell
 //
-//  Created by Grant Davis on 4/12/22.
+//  Created by Grant Davis on 4/13/22.
 //
 //
 
@@ -17,8 +17,8 @@ extension Entry {
     }
 
     @NSManaged public var calories: String?
-    @NSManaged public var notes: String?
     @NSManaged public var date: Date?
+    @NSManaged public var notes: String?
     @NSManaged public var stringDate: String?
 
 }

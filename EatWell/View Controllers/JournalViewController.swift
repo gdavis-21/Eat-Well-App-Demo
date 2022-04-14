@@ -4,7 +4,6 @@
 //
 //  Created by Grant Davis on 4/11/22.
 //
-
 import UIKit
 import CoreData
 
@@ -45,13 +44,14 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         label.text = Date.now.formatted(date: .abbreviated, time: .omitted)
         
         days = createDays()
+        
         entries = fetchEntries(selectedDate: selectedDate)
     }
     
     // MARK: - Table View
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        entries!.count ?? 0
+        entries!.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,41 +107,53 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         return days
     }
-    
-    func saveCoreData() {
-        do {
-            try self.context.save()
-        }
-        catch {
-            
-        }
-    }
 
     @IBAction func tableButtonPlus(_ sender: Any) {
-        // Create a new entry object to add to tableView.
-        var entry = Entry(context: context)
-        // Initialize its stringDate to selectedDate
-        entry.stringDate = selectedDate!
-        // Update the display to include the entry.
-        do {
-            try self.context.save()
-        }
-        catch {
+        
+        if entries!.count < 3 {
+            
+            // Create a new entry object to add to tableView.
+            var entry = Entry(context: context)
+            
+            // Initialize its stringDate to the current selectedDate
+            entry.stringDate = selectedDate!
+            
+            // Save the object to the Store.
+            try! context.save()
+            
+            // Refresh the 'entries' array.
+            entries = fetchEntries(selectedDate: selectedDate)
+            
+            // Update the tableView.
+            tableView.reloadData()
+            
+            // Modify the new cell to be empty.
+            let sortedCells = (tableView.visibleCells as! [JournalTableViewCell]).sorted {
+                (itemA, itemB) in
+                itemA.datePicker.date > itemB.datePicker.date
+            }
+            let newCell = sortedCells.last
+            newCell?.textField.text = "0"
+            newCell?.textView.text = ""
+            newCell?.datePicker.date = Date.now
+            
+            // Reload the tableView
+            tableView.reloadData()
             
         }
-        entries = fetchEntries(selectedDate: selectedDate)
-        // Update the tableView.
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        print("Selected Date: \(selectedDate!)")
+        print("Number of Entries: \(entries!.count)")
+        print("Number of Visible Cells: \(tableView.visibleCells.count)")
+        
+        
     }
 
     @IBAction func collectionButtonDate(_ sender: Any) {
-        entries = fetchEntries(selectedDate: selectedDate)
         
+        // Save the previous cells' values.
         var counter = 0
         // Loop over each entry in the selectedDate.
-        if entries!.count > 0 && tableView.visibleCells.count > 0{
+        if entries!.count > 0 && tableView.visibleCells.count > 0 {
             for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
                 // Save the text stored in 'notes' textView.
                 entries![counter].notes = cell.textView.text
@@ -151,8 +163,9 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
                 entries![counter].date = cell.datePicker.date
                  counter += 1
             }
-            saveCoreData()
+            try! context.save()
         }
+        
         
         // Modify selectedDate to the date the user selected.
         selectedDate = days![Int((sender as! JournalButton).stringDate!)!]
@@ -170,14 +183,15 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         if entries!.count > 0 && tableView.visibleCells.count > 0 {
             for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
                 // Update cell to reflect new calories, notes, and date.
-                cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date!)
+                cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date ?? Date.now)
                 counter += 1
             }
+            tableView.reloadData()
             
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
 }
-}
 
+}

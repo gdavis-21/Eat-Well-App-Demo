@@ -21,5 +21,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>To track and present physical activity.</string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 </dict>
 </plist>
