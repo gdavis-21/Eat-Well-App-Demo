@@ -199,7 +199,12 @@ class SnapshotViewController: UIViewController {
         // Data types that will interact with Healthkit.
         guard let activeEnergyBurned = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
               let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount),
-              let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate) else {
+              let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate),
+              let DOB = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
+              let height = HKObjectType.quantityType(forIdentifier: .height),
+              let sex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
+              let weight =
+                      HKObjectType.quantityType(forIdentifier: .bodyMass) else {
             print("Error 1:")
             return false
         }
@@ -207,7 +212,11 @@ class SnapshotViewController: UIViewController {
         // Data types that will be read from Healthkit
         let toRead: Set<HKObjectType> = [activeEnergyBurned,
                                         stepCount,
-                                        heartRate]
+                                        heartRate,
+                                            DOB,
+                                         height,
+                                            sex,
+                                            weight]
         // Data types that will be written to Healthkit.
         let toWrite: Set<HKSampleType> = []
         
@@ -230,7 +239,7 @@ class SnapshotViewController: UIViewController {
     func getMostRecentSample(for sampleType: HKSampleType, completition: @escaping (HKQuantitySample?, Error?) -> Swift.Void) {
         
         // Load most recent samples.
-        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: Date.distantPast, end: Date(), options: .strictEndDate)
+        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: Date(), end: Date(), options: .strictEndDate)
         
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
         

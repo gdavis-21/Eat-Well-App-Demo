@@ -21,6 +21,7 @@
 		778F3AFA28050463000B4264 /* JournalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F3AF928050463000B4264 /* JournalTableViewCell.swift */; };
 		779CE3912807B0E1009EDE1C /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779CE38D2807B0E1009EDE1C /* Entry+CoreDataClass.swift */; };
 		779CE3922807B0E1009EDE1C /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779CE38E2807B0E1009EDE1C /* Entry+CoreDataProperties.swift */; };
+		77FFCEC42807F78F00B82B59 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFCEC32807F78E00B82B59 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		778F3AF928050463000B4264 /* JournalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewCell.swift; sourceTree = "<group>"; };
 		779CE38D2807B0E1009EDE1C /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
 		779CE38E2807B0E1009EDE1C /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		77FFCEC32807F78E00B82B59 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			children = (
 				776856B72804C16A00363385 /* JournalViewController.swift */,
 				7782B959280697D200493C7E /* SnapshotViewController.swift */,
+				77FFCEC32807F78E00B82B59 /* ProfileViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				776856B82804C16A00363385 /* JournalViewController.swift in Sources */,
 				779CE3922807B0E1009EDE1C /* Entry+CoreDataProperties.swift in Sources */,
 				779CE3912807B0E1009EDE1C /* Entry+CoreDataClass.swift in Sources */,
+				77FFCEC42807F78F00B82B59 /* ProfileViewController.swift in Sources */,
 				776856B42804C16A00363385 /* AppDelegate.swift in Sources */,
 				776856BE2804C16A00363385 /* EatWell.xcdatamodeld in Sources */,
 				7782B9402805E51400493C7E /* JournalButton.swift in Sources */,
