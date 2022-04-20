@@ -48,6 +48,11 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         entries = fetchEntries(selectedDate: selectedDate)
         
         tableView.reloadData()
+        collectionView.reloadData()
+        
+        let indexPath = (NSIndexPath(row: Int(selectedDate!)! - 1, section: 0) as IndexPath)
+        
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     
         var counter = 0
         if entries!.count > 0 && tableView.visibleCells.count > 0 {
@@ -58,9 +63,11 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
             }
             tableView.reloadData()
         }
+        
+            
     }
         
-
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -106,6 +113,12 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         // Set the button's stringDate to indexPath.row (i.e. 5).
         cell.button.stringDate = String(indexPath.row)
         
+        if (String(Int(cell.button.stringDate!)! + 1)) == selectedDate {
+            cell.button.backgroundColor = .green
+        }
+        else {
+            cell.button.backgroundColor = .clear
+        }
         return cell
     }
     
@@ -182,6 +195,12 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @IBAction func collectionButtonDate(_ sender: Any) {
         
+        var indexPath = NSIndexPath(row: Int(selectedDate!)! - 1, section: 0) as IndexPath
+        
+        if abs(Int(selectedDate!)! - 1 - Int((sender as! JournalButton).stringDate!)!) <= 7 {
+            ((collectionView.cellForItem(at: indexPath))! as! JournalCollectionViewCell).button.backgroundColor = .white
+        }
+        
         // Save the previous cells' values.
         var counter = 0
         // Loop over each entry in the selectedDate.
@@ -201,6 +220,12 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         
         // Modify selectedDate to the date the user selected.
         selectedDate = days![Int((sender as! JournalButton).stringDate!)!]
+        
+        print(selectedDate)
+        indexPath = NSIndexPath(row: Int(selectedDate!)! - 1, section: 0) as IndexPath
+        
+        ((collectionView.cellForItem(at: indexPath))! as! JournalCollectionViewCell).button.backgroundColor = .green
+        
         
         entries = fetchEntries(selectedDate: selectedDate)
         

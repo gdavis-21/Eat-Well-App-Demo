@@ -17,11 +17,14 @@ class SnapshotViewController: UIViewController {
     @IBOutlet var caloriesBurnedLabel: UILabel!
     @IBOutlet var stepsWalkedLabel: UILabel!
     @IBOutlet var standTimeLabel: UILabel!
+    @IBOutlet var greetingLabel: UILabel!
     
     
     var healthStore: HKHealthStore?
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +51,7 @@ class SnapshotViewController: UIViewController {
                 
                 
                 let stepsWalked = sample.quantity.doubleValue(for: HKUnit.count())
-                self.stepsWalkedLabel.text = String(stepsWalked)
+                self.stepsWalkedLabel.text = String(Int(stepsWalked))
                 
             }
             
@@ -99,11 +102,33 @@ class SnapshotViewController: UIViewController {
             }
             caloriesConsumedLabel.text = String(caloriesConsumed)
             
+            let name = userDefaults.string(forKey: "Name")
+            
+            if (name == nil || name == "PLACEHOLDER") {
+                greetingLabel.text = "Today Looks Great!"
+            }
+            else {
+                greetingLabel.text = "Today Looks Great, \(name!)!"
+            }
+            
         }
+        
     }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        super.viewDidAppear(true)
+        
+        let name = userDefaults.string(forKey: "Name")
+        
+        if (name == nil || name == "PLACEHOLDER") {
+            greetingLabel.text = "Today Looks Great!"
+        }
+        else {
+            greetingLabel.text = "Today Looks Great, \(name!)!"
+        }
         
         if (initializeHealthKit() && authorizeHealthKit()) {
             
@@ -126,7 +151,7 @@ class SnapshotViewController: UIViewController {
                 
                 
                 let stepsWalked = sample.quantity.doubleValue(for: HKUnit.count())
-                self.stepsWalkedLabel.text = String(stepsWalked)
+                self.stepsWalkedLabel.text = String(Int(stepsWalked))
                 
             }
             
@@ -145,7 +170,7 @@ class SnapshotViewController: UIViewController {
                 
                 
                 let averageEnergyBurned = sample.quantity.doubleValue(for: HKUnit.largeCalorie())
-                self.caloriesBurnedLabel.text = String(averageEnergyBurned)
+                self.caloriesBurnedLabel.text = String(Int(averageEnergyBurned))
                 
             }
             
@@ -199,8 +224,6 @@ class SnapshotViewController: UIViewController {
         // Data types that will interact with Healthkit.
         guard let activeEnergyBurned = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
               let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount),
-              let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate),
-              let DOB = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
               let height = HKObjectType.quantityType(forIdentifier: .height),
               let sex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
               let weight =
@@ -212,8 +235,6 @@ class SnapshotViewController: UIViewController {
         // Data types that will be read from Healthkit
         let toRead: Set<HKObjectType> = [activeEnergyBurned,
                                         stepCount,
-                                        heartRate,
-                                            DOB,
                                          height,
                                             sex,
                                             weight]
@@ -238,8 +259,13 @@ class SnapshotViewController: UIViewController {
     // Source https://www.raywenderlich.com/459-healthkit-tutorial-with-swift-getting-started
     func getMostRecentSample(for sampleType: HKSampleType, completition: @escaping (HKQuantitySample?, Error?) -> Swift.Void) {
         
-        // Load most recent samples.
-        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: Date(), end: Date(), options: .strictEndDate)
+        // Load samples from today.
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/DD/YY HH:mm:ss"
+        
+        let date = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date.now)
+        
+        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: date, end: Date(), options: .strictEndDate)
         
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
         

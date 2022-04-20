@@ -11,5 +11,6 @@ class JournalCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var button: JournalButton!
     
+    @IBOutlet var background: UIView!
     
 }
