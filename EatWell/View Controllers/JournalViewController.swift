@@ -10,6 +10,8 @@ import CoreData
 class JournalViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
     
+    // ...
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // days is the array of Strings used to populate the collectionView.
