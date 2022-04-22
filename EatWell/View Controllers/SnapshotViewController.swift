@@ -39,7 +39,7 @@ class SnapshotViewController: UIViewController {
                 guard let sample = sample else {
                     
                     if let error = error {
-                        fatalError()
+                        
                     }
                     
                     return
@@ -58,7 +58,7 @@ class SnapshotViewController: UIViewController {
                 guard let sample = sample else {
                     
                     if let error = error {
-                        fatalError()
+                        
                     }
                     
                     return
@@ -77,7 +77,7 @@ class SnapshotViewController: UIViewController {
                 guard let sample = sample else {
                     
                     if let error = error {
-                        fatalError()
+                        
                     }
                     
                     return
@@ -100,7 +100,7 @@ class SnapshotViewController: UIViewController {
             
             let name = userDefaults.string(forKey: "Name")
             
-            if (name == nil || name == "PLACEHOLDER") {
+            if (name == nil || name == "Placeholder") {
                 greetingLabel.text = "Today Looks Great!"
             }
             else {
@@ -119,7 +119,7 @@ class SnapshotViewController: UIViewController {
         
         let name = userDefaults.string(forKey: "Name")
         
-        if (name == nil || name == "PLACEHOLDER") {
+        if (name == nil || name == "Placeholder") {
             greetingLabel.text = "Today Looks Great!"
         }
         else {

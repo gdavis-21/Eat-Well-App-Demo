@@ -15,14 +15,12 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
     var days: [String]? = nil
     // entries is the array of Entry objects used to populate the tableView.
     var entries: [Entry]? = nil
-    
     // selectedDateNumeric holds the date the user selects (i.e. 14).
     var selectedDate: String? = nil
     
     @IBOutlet var collectionView: UICollectionView!
-    
     @IBOutlet var tableView: UITableView!
-    
+    @IBOutlet var textField: UITextField!
     @IBOutlet var label: UILabel!
     
     override func viewDidLoad() {
@@ -170,16 +168,12 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
             
             // Create a new entry object to add to tableView.
             let entry = Entry(context: context)
-            
             // Initialize its stringDate to the current selectedDate
             entry.stringDate = selectedDate!
-            
             // Save the object to the Store.
             try! context.save()
-            
             // Refresh the 'entries' array.
             entries = fetchEntries(selectedDate: selectedDate)
-            
             // Update the tableView.
             tableView.reloadData()
             
@@ -205,7 +199,7 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         var indexPath = NSIndexPath(row: Int(selectedDate!)! - 1, section: 0) as IndexPath
         
         // Only update display of previous cell to white if it's on screen.
-        if abs(Int(selectedDate!)! - 1 - Int((sender as! JournalButton).stringDate!)!) <= 7 {
+        if abs(Int(selectedDate!)! - 1 - Int((sender as! JournalButton).stringDate!)!) <= 5 {
             ((collectionView.cellForItem(at: indexPath))! as! JournalCollectionViewCell).button.backgroundColor = .white
         }
         

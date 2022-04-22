@@ -24,6 +24,7 @@ class JournalTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         textField.text = calories ?? "0"
+        textField.keyboardType = UIKeyboardType.numberPad
         textView.text = notes ?? ""
         datePicker.date = date ?? Date.now
 
