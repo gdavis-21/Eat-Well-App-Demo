@@ -9,9 +9,6 @@ import CoreData
 
 class JournalViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    
-    // ...
-    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // days is the array of Strings used to populate the collectionView.
@@ -53,20 +50,11 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionView.reloadData()
         
         let indexPath = (NSIndexPath(row: Int(selectedDate!)! - 1, section: 0) as IndexPath)
-        
+        // Set the current focus in the collectionView to current date.
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     
-        var counter = 0
-        if entries!.count > 0 && tableView.visibleCells.count > 0 {
-            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
-                // Update cell to reflect new calories, notes, and date.
-                cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date ?? Date.now)
-                    counter += 1
-            }
-            tableView.reloadData()
-        }
-        
-            
+        updateCells(entries: entries, tableView: tableView)
+    
     }
         
     
@@ -75,17 +63,7 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewDidDisappear(animated)
         
         if selectedDate == Date.now.formatted(date: .numeric, time: .omitted).components(separatedBy: "/")[1] {
-            var counter = 0
-            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
-                // Save the text stored in 'notes' textView.
-                entries![counter].notes = cell.textView.text
-                // Save the text stored in 'calories' textField.
-                entries![counter].calories = cell.textField.text
-                // Save the date stored in 'date' datePicker.
-                entries![counter].date = cell.datePicker.date
-                 counter += 1
-            }
-            try! context.save()
+            saveCells(entries: entries, tableView: tableView)
         }
     }
     
@@ -143,6 +121,21 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         return entries
     }
     
+    // Save the cells in tableView to persisentStore
+    func saveCells(entries: [Entry]?, tableView: UITableView) {
+        var counter = 0
+        for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
+            // Save the text stored in 'notes' textView.
+            entries![counter].notes = cell.textView.text
+            // Save the text stored in 'calories' textField.
+            entries![counter].calories = cell.textField.text
+            // Save the date stored in 'date' datePicker.
+            entries![counter].date = cell.datePicker.date
+             counter += 1
+        }
+        try! context.save()
+    }
+    
     
     // MARK: - Extra Functions
     
@@ -154,13 +147,29 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         return days
     }
+    
+    // Update cells in tableView.
+    func updateCells(entries: [Entry]?, tableView: UITableView) {
+        var counter = 0
+        if entries!.count > 0 && tableView.visibleCells.count > 0 {
+            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
+                // Update cell to reflect new calories, notes, and date.
+                cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date ?? Date.now)
+                    counter += 1
+            }
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Button Functions
         
     @IBAction func tableButtonPlus(_ sender: Any) {
         
+        // If we add more than 3 cells, some of the cells will be offscreen. (problematic)
         if entries!.count < 3 {
             
             // Create a new entry object to add to tableView.
-            var entry = Entry(context: context)
+            let entry = Entry(context: context)
             
             // Initialize its stringDate to the current selectedDate
             entry.stringDate = selectedDate!
@@ -188,10 +197,6 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
             tableView.reloadData()
             
         }
-        print("Selected Date: \(selectedDate!)")
-        print("Number of Entries: \(entries!.count)")
-        print("Number of Visible Cells: \(tableView.visibleCells.count)")
-        
         
     }
 
@@ -199,31 +204,23 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         
         var indexPath = NSIndexPath(row: Int(selectedDate!)! - 1, section: 0) as IndexPath
         
+        // Only update display of previous cell to white if it's on screen.
         if abs(Int(selectedDate!)! - 1 - Int((sender as! JournalButton).stringDate!)!) <= 7 {
             ((collectionView.cellForItem(at: indexPath))! as! JournalCollectionViewCell).button.backgroundColor = .white
         }
         
         // Save the previous cells' values.
-        var counter = 0
-        // Loop over each entry in the selectedDate.
         if entries!.count > 0 && tableView.visibleCells.count > 0 {
-            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
-                // Save the text stored in 'notes' textView.
-                entries![counter].notes = cell.textView.text
-                // Save the text stored in 'calories' textField.
-                entries![counter].calories = cell.textField.text
-                // Save the date stored in 'date' datePicker.
-                entries![counter].date = cell.datePicker.date
-                 counter += 1
-            }
-            try! context.save()
+            saveCells(entries: entries, tableView: tableView)
         }
-        
         
         // Modify selectedDate to the date the user selected.
         selectedDate = days![Int((sender as! JournalButton).stringDate!)!]
         
-        print(selectedDate)
+        let textDay = Date.now.formatted(date: .abbreviated, time: .omitted).components(separatedBy: " ")
+        print("\(textDay[0]) \(selectedDate), \(textDay[2])")
+        label.text = "\(textDay[0]) \(selectedDate!), \(textDay[2])"
+        
         indexPath = NSIndexPath(row: Int(selectedDate!)! - 1, section: 0) as IndexPath
         
         ((collectionView.cellForItem(at: indexPath))! as! JournalCollectionViewCell).button.backgroundColor = .green
@@ -237,20 +234,8 @@ class JournalViewController: UIViewController, UICollectionViewDataSource, UICol
         print("Number of Entries: \(entries!.count)")
         print("Number of Visible Cells: \(tableView.visibleCells.count)")
         
-        counter = 0
-        // Loop over each entry in the selectedDate.
-        if entries!.count > 0 && tableView.visibleCells.count > 0 {
-            for cell in (tableView.visibleCells as! [JournalTableViewCell]) {
-                // Update cell to reflect new calories, notes, and date.
-                cell.updateValues(calories: entries![counter].calories ?? "0", notes: entries![counter].notes ?? String(counter), date: entries![counter].date ?? Date.now)
-                counter += 1
-            }
-            tableView.reloadData()
+        updateCells(entries: entries, tableView: tableView)
             
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
 }
 
-}

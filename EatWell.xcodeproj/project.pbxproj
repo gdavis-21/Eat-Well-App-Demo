@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7749E955281243A200A8E5F9 /* HealthKitFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749E954281243A200A8E5F9 /* HealthKitFunctions.swift */; };
 		776856B42804C16A00363385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776856B32804C16A00363385 /* AppDelegate.swift */; };
 		776856B62804C16A00363385 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776856B52804C16A00363385 /* SceneDelegate.swift */; };
 		776856B82804C16A00363385 /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776856B72804C16A00363385 /* JournalViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7749E954281243A200A8E5F9 /* HealthKitFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitFunctions.swift; sourceTree = "<group>"; };
 		776856B02804C16A00363385 /* EatWell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EatWell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776856B32804C16A00363385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		776856B52804C16A00363385 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				7782B93F2805E51400493C7E /* JournalButton.swift */,
+				7749E954281243A200A8E5F9 /* HealthKitFunctions.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			files = (
 				7782B95A280697D200493C7E /* SnapshotViewController.swift in Sources */,
 				778F3AF82804F72F000B4264 /* JournalCollectionViewCell.swift in Sources */,
+				7749E955281243A200A8E5F9 /* HealthKitFunctions.swift in Sources */,
 				778F3AFA28050463000B4264 /* JournalTableViewCell.swift in Sources */,
 				776856B82804C16A00363385 /* JournalViewController.swift in Sources */,
 				779CE3922807B0E1009EDE1C /* Entry+CoreDataProperties.swift in Sources */,
