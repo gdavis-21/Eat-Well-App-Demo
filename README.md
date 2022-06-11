@@ -1,13 +1,30 @@
 # EatWell: An App to Track and Document What You Eat
 
+EatWell is the final project for my course in mobile applications development.
+
+## Inspiration:
+- EatWell is inspired by my desire to live a more health conscious life.
+
 ## Purpose: 
-- My partners and I designed Eat Well to provide users with an easy and efficient way to track what the user eats over a given month.
-- The app is broken down into three scenes:
-  1. Snapshot - Provides a broad overview of your day (e.g. calories consumed, calories burned, steps walked, and stand time)
-  2. Journal - Provides a way to track and document calories consumed as well as provide additional notes about day.
-  3. Profile - Provides general information about the user (name, age, weight, sex, and height)
+The app 
+- Tracks what the user eats each day over a given month.
+- Tracks the number of calories the user burns in a day
+- Lets the user provide notes about each meal entry.
+
+## Scenes:
+- Snapshot
+  In this scence, the user can see their calories consumed, their calories burned, their steps walked, and their current stand time (for today).
+  
+- Journal
+  In this scene, the user can enter notes about their meal, enter calories for meal.
+  
+- Profile
+  In this scence, the user can see information about their name, their age, their weight, their sex, and their height.
+
 
 ## Frameworks:
-- UIKit: 
-- CoreData: to store entries of the tableView in the Journal Scene.
-- HealthKit: to read information from the user's health app (e.g. calories burned, steps walked, stand time, weight, sex, height)
+- UIKit: I utilitized UIKit to build the interface.
+
+- CoreData: I utilized CoreData to store and persist user data after closure of the app. 
+
+- HealthKit: I utilized HealthKit to read information from the user's health app (e.g. calories burned, steps walked, stand time, weight, sex, height)
