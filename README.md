@@ -14,17 +14,20 @@ The app
 - Lets the user provide notes about each meal entry.
 
 ## Scenes:
+
+![Snapshot Scene](/Snapshot-Scene.png)
+![Journal Scene](/Journal-Scene.png)
+![Profile Scene](/Profile-Scene.png)
+
+
 Snapshot
 - In this scence, the user can see their calories consumed, their calories burned, their steps walked, and their current stand time (for today).
-![Snapshot Scene](/Snapshot-Scene.png)
   
 Journal
 - In this scene, the user can enter notes about their meal, enter calories for meal.
-![Journal Scene](/Journal-Scene.png)
   
 Profile
 - In this scence, the user can see information about their name, their age, their weight, their sex, and their height.
-![Profile Scene](/Profile-Scene.png)
 
 
 ## Frameworks:
