@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7749E955281243A200A8E5F9 /* HealthKitFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749E954281243A200A8E5F9 /* HealthKitFunctions.swift */; };
 		7749E9572813069800A8E5F9 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749E9562813069700A8E5F9 /* StartViewController.swift */; };
 		776856B42804C16A00363385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776856B32804C16A00363385 /* AppDelegate.swift */; };
 		776856B62804C16A00363385 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776856B52804C16A00363385 /* SceneDelegate.swift */; };
@@ -19,6 +18,7 @@
 		7782B9402805E51400493C7E /* JournalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B93F2805E51400493C7E /* JournalButton.swift */; };
 		7782B95A280697D200493C7E /* SnapshotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B959280697D200493C7E /* SnapshotViewController.swift */; };
 		7782B95E2806B21100493C7E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7782B95D2806B21100493C7E /* HealthKit.framework */; };
+		778DE23F28554E2000004021 /* HealthKitFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778DE23E28554E2000004021 /* HealthKitFunctions.swift */; };
 		778F3AF82804F72F000B4264 /* JournalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F3AF72804F72F000B4264 /* JournalCollectionViewCell.swift */; };
 		778F3AFA28050463000B4264 /* JournalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F3AF928050463000B4264 /* JournalTableViewCell.swift */; };
 		779CE3912807B0E1009EDE1C /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779CE38D2807B0E1009EDE1C /* Entry+CoreDataClass.swift */; };
@@ -27,7 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7749E954281243A200A8E5F9 /* HealthKitFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitFunctions.swift; sourceTree = "<group>"; };
 		7749E9562813069700A8E5F9 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		776856B02804C16A00363385 /* EatWell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EatWell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776856B32804C16A00363385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		7782B959280697D200493C7E /* SnapshotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotViewController.swift; sourceTree = "<group>"; };
 		7782B95B2806B21100493C7E /* EatWell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EatWell.entitlements; sourceTree = "<group>"; };
 		7782B95D2806B21100493C7E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		778DE23E28554E2000004021 /* HealthKitFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitFunctions.swift; sourceTree = "<group>"; };
 		778F3AF72804F72F000B4264 /* JournalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCollectionViewCell.swift; sourceTree = "<group>"; };
 		778F3AF928050463000B4264 /* JournalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewCell.swift; sourceTree = "<group>"; };
 		779CE38D2807B0E1009EDE1C /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -82,12 +82,12 @@
 			isa = PBXGroup;
 			children = (
 				7782B95B2806B21100493C7E /* EatWell.entitlements */,
+				776856B32804C16A00363385 /* AppDelegate.swift */,
+				776856B52804C16A00363385 /* SceneDelegate.swift */,
 				7782B93E2805E4FB00493C7E /* Misc */,
 				776856CC2804F01700363385 /* View Controllers */,
 				776856CB2804F01200363385 /* Models */,
 				776856CA2804F00D00363385 /* Views */,
-				776856B32804C16A00363385 /* AppDelegate.swift */,
-				776856B52804C16A00363385 /* SceneDelegate.swift */,
 				776856B92804C16A00363385 /* Main.storyboard */,
 				776856BF2804C16F00363385 /* Assets.xcassets */,
 				776856C12804C16F00363385 /* LaunchScreen.storyboard */,
@@ -130,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				7782B93F2805E51400493C7E /* JournalButton.swift */,
-				7749E954281243A200A8E5F9 /* HealthKitFunctions.swift */,
+				778DE23E28554E2000004021 /* HealthKitFunctions.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -216,7 +216,6 @@
 			files = (
 				7782B95A280697D200493C7E /* SnapshotViewController.swift in Sources */,
 				778F3AF82804F72F000B4264 /* JournalCollectionViewCell.swift in Sources */,
-				7749E955281243A200A8E5F9 /* HealthKitFunctions.swift in Sources */,
 				778F3AFA28050463000B4264 /* JournalTableViewCell.swift in Sources */,
 				776856B82804C16A00363385 /* JournalViewController.swift in Sources */,
 				779CE3922807B0E1009EDE1C /* Entry+CoreDataProperties.swift in Sources */,
@@ -224,6 +223,7 @@
 				77FFCEC42807F78F00B82B59 /* ProfileViewController.swift in Sources */,
 				7749E9572813069800A8E5F9 /* StartViewController.swift in Sources */,
 				776856B42804C16A00363385 /* AppDelegate.swift in Sources */,
+				778DE23F28554E2000004021 /* HealthKitFunctions.swift in Sources */,
 				776856BE2804C16A00363385 /* EatWell.xcdatamodeld in Sources */,
 				7782B9402805E51400493C7E /* JournalButton.swift in Sources */,
 				776856B62804C16A00363385 /* SceneDelegate.swift in Sources */,
